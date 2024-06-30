@@ -133,6 +133,6 @@ export async function PUT(
     }
 
     return NextResponse.json({
-        'message': `${found['number']}本券已成功使用`
+        'message': `本券已成功使用${found['number']}次`
     }, { status: 200 })
 }
