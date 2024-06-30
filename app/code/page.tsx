@@ -62,7 +62,7 @@ export default function Update() {
             <form onSubmit={onSubmitUpdate}>
                 <div className="form-floating mb-3">
                     <input value={serialNumber} onChange={handleOnChange} className="form-control form-control-lg" type="text" id="serialNumber" name="serialNumber" required/>
-                    <label className="form-label" htmlFor="serialNumber">序号</label>
+                    <label className="form-label" htmlFor="serialNumber">序列号</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input className="form-control form-control-lg" type="number" id="passCode" name="passCode" required minLength={5} maxLength={5}/>

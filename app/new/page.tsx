@@ -38,7 +38,7 @@ export default function Create() {
 
                 setCreateMessage(<div className="card text-bg-success">
                     <div className="card-body">
-                        {"序号: " + readableSerialNumber}
+                        {"序列号: " + readableSerialNumber}
                     </div>
                 </div>)
 
@@ -94,7 +94,7 @@ export default function Create() {
         <>
             <div className="flex items-center h-[100dvh]">
                 <div className="container">
-                    <h1>券发行</h1>
+                    <h1>兑换券发行</h1>
                     <form className="needs-validation" onSubmit={onSubmitCreate}>
                         <div className="form-floating mb-3">
                             <input className="form-control form-control-lg" type="number" id="number" name="number" required minLength={1} maxLength={10} />
