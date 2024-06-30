@@ -27,21 +27,21 @@ export async function POST(
     const number = data['number']
     if (!number || number.toString() === '0' || number.toString().length <= 0 || number.toString().length >= 6 || !/^[0-9]+$/.test(number.toString())) {
         return NextResponse.json({
-            'errorMessage': "回数は1回以上99999回以下にしてください"
+            'errorMessage': "次数应至少为 1 次且不超过 99999 次"
         }, { status: 400 })
     }
 
     const expiredAt = data['expiredAt']
     if (expiredAt && (expiredAt.toString().length !== 10 || !/^\d{4}-\d{2}-\d{2}$/.test(expiredAt))) {
         return NextResponse.json({
-            'errorMessage': "有効期限はyyyy-mm-dd形式で入力してください"
+            'errorMessage': "请以 yyyy-mm-dd 格式输入有效期"
         }, { status: 400 })
     }
 
     const passCode = data['passCode']
     if (!passCode || passCode.toString().length !== 5 || !/^[0-9]+$/.test(passCode.toString())) {
         return NextResponse.json({
-            'errorMessage': "パスコードは5桁の数字で入力してください"
+            'errorMessage': "以 5 位数字的形式输入您的密码"
         }, { status: 400 })
     }
 
@@ -63,7 +63,7 @@ export async function POST(
     )
     if (createResponse !== "OK") {
         NextResponse.json({
-            'errorMessage': "何らかの理由で発行に失敗しました"
+            'errorMessage': "由于某种原因无法发行"
         }, { status: 500 })
     }
 
@@ -79,7 +79,7 @@ export async function PUT(
     const serialNumber = data['serialNumber']
     if (!serialNumber || serialNumber.toString().length !== 12 || !/^[0-9]+$/.test(serialNumber.toString())) {
         return NextResponse.json({
-            'errorMessage': "シリアル番号は12桁の数字で入力してください"
+            'errorMessage': "序列号必须是 12 位数字"
         }, { status: 400 })
     }
 
@@ -93,20 +93,20 @@ export async function PUT(
     const found = JSON.parse(JSON.stringify(await kv.get(serialNumber)))
     if (!found) {
         return NextResponse.json({
-            'errorMessage': "無効なシリアル番号です"
+            'errorMessage': "序列号无效"
         }, { status: 404 })
     }
 
     const hash = hashSerialNumber(serialNumber, passCode);
     if (found['hash'] !== hash) {
         return NextResponse.json({
-            "errorMessage": "パスコードが違います"
+            "errorMessage": "密码错误"
         }, { status: 403 })
     }
 
     if (!!found['usedAt']) {
         return NextResponse.json({
-            'message': "この券は既に利用されています"
+            'message': "此券已使用"
         }, { status: 200 })
     }
 
@@ -114,7 +114,7 @@ export async function PUT(
     const foundExpiredAt = found['expiredAt']
     if (!!foundExpiredAt && now > found['expiredAt']) {
         return NextResponse.json({
-            'message': "この券は有効期限が切れています"
+            'message': "此券已过期"
         }, { status: 200 })
     }
 
@@ -128,11 +128,11 @@ export async function PUT(
 
     if (updateResponse !== "OK") {
         NextResponse.json({
-            'errorMessage': "何らかの理由で確認に失敗しました"
+            'errorMessage': "由于某种原因导致验证失败"
         }, { status: 500 })
     }
 
     return NextResponse.json({
-        'message': `${found['number']}回券が正常に利用されました`
+        'message': `${found['number']}本券已成功使用`
     }, { status: 200 })
 }

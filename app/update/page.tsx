@@ -58,17 +58,17 @@ export default function Update() {
 
     return (
         <div className="container mt-[30%]">
-            <h1>券を利用する</h1>
+            <h1>使用券</h1>
             <form onSubmit={onSubmitUpdate}>
                 <div className="form-floating mb-3">
                     <input value={serialNumber} onChange={handleOnChange} className="form-control form-control-lg" type="text" id="serialNumber" name="serialNumber" required/>
-                    <label className="form-label" htmlFor="serialNumber">シリアル番号</label>
+                    <label className="form-label" htmlFor="serialNumber">序号</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input className="form-control form-control-lg" type="number" id="passCode" name="passCode" required minLength={5} maxLength={5}/>
-                    <label className="form-label" htmlFor="passCode">パスコード</label>
+                    <label className="form-label" htmlFor="passCode">密码</label>
                 </div>
-                <button className="btn btn-primary btn-lg mb-3" type="submit" disabled={submitUpdateDisabled}>利用する</button>
+                <button className="btn btn-primary btn-lg mb-3" type="submit" disabled={submitUpdateDisabled}>使用</button>
             </form>
             {updateMessage}
         </div>
