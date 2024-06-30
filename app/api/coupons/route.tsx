@@ -41,7 +41,7 @@ export async function POST(
     const passCode = data['passCode']
     if (!passCode || passCode.toString().length !== 5 || !/^[0-9]+$/.test(passCode.toString())) {
         return NextResponse.json({
-            'errorMessage': "以 5 位数字的形式输入您的密码"
+            'errorMessage': "请以 5 位数字的形式输入您的密码"
         }, { status: 400 })
     }
 
@@ -86,7 +86,7 @@ export async function PUT(
     const passCode = data['passCode']
     if (!passCode || passCode.toString().length !== 5 || !/^[0-9]+$/.test(passCode.toString())) {
         return NextResponse.json({
-            'errorMessage': "パスコードは5桁の数字で入力してください"
+            'errorMessage': "请以 5 位数字的形式输入您的密码"
         }, { status: 400 })
     }
 
