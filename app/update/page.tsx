@@ -8,6 +8,7 @@ export default function Update() {
     const [updateMessage, setUpdateMessage] = useState<JSX.Element>(<></>)
     const [submitUpdateDisabled, setSubmitUpdateDisabled] = useState(false)
     const [serialNumber, setSerialNumber] = useState(useSearchParams().get('sn') ?? '')
+    const [passCode, setPassCode] = useState(useSearchParams().get('key') ?? '')
 
     function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
         const value = Array.from(event.target.value.replace(/[^0-9]/g, ''))
