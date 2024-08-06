@@ -106,7 +106,7 @@ export async function PUT(
 
     if (!!found['usedAt']) {
         return NextResponse.json({
-            'message': "序列号已经过验证，本序列校验码为${found['number']}"
+            'message': "序列号已经过验证"
         }, { status: 200 })
     }
 
