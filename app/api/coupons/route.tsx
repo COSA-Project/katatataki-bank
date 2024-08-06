@@ -27,7 +27,7 @@ export async function POST(
     const number = data['number']
     if (!number || number.toString() === '0' || number.toString().length <= 0 || number.toString().length >= 6 || !/^[0-9]+$/.test(number.toString())) {
         return NextResponse.json({
-            'errorMessage': "次数应至少为 1 次且不超过 99999 次"
+            'errorMessage': "校验码应为1-99999的整数"
         }, { status: 400 })
     }
 
@@ -41,7 +41,7 @@ export async function POST(
     const passCode = data['passCode']
     if (!passCode || passCode.toString().length !== 5 || !/^[0-9]+$/.test(passCode.toString())) {
         return NextResponse.json({
-            'errorMessage': "请以 5 位数字的形式输入您的密码"
+            'errorMessage': "请以 5 位数字的形式输入密码"
         }, { status: 400 })
     }
 
@@ -86,7 +86,7 @@ export async function PUT(
     const passCode = data['passCode']
     if (!passCode || passCode.toString().length !== 5 || !/^[0-9]+$/.test(passCode.toString())) {
         return NextResponse.json({
-            'errorMessage': "请以 5 位数字的形式输入您的密码"
+            'errorMessage': "请以 5 位数字的形式输入密码"
         }, { status: 400 })
     }
 
@@ -106,7 +106,7 @@ export async function PUT(
 
     if (!!found['usedAt']) {
         return NextResponse.json({
-            'message': "此券已使用"
+            'message': "序列号已经过验证，本序列校验码为${found['number']}"
         }, { status: 200 })
     }
 
@@ -114,7 +114,7 @@ export async function PUT(
     const foundExpiredAt = found['expiredAt']
     if (!!foundExpiredAt && now > found['expiredAt']) {
         return NextResponse.json({
-            'message': "此券已过期"
+            'message': "该序列号已失效"
         }, { status: 200 })
     }
 
@@ -133,6 +133,6 @@ export async function PUT(
     }
 
     return NextResponse.json({
-        'message': `本券已成功使用${found['number']}次`
+        'message': `验证成功，本序列校验码为${found['number']}`
     }, { status: 200 })
 }
