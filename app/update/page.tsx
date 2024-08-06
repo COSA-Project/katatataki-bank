@@ -8,7 +8,6 @@ export default function Update() {
     const [updateMessage, setUpdateMessage] = useState<JSX.Element>(<></>)
     const [submitUpdateDisabled, setSubmitUpdateDisabled] = useState(false)
     const [serialNumber, setSerialNumber] = useState(useSearchParams().get('sn') ?? '')
-    const [passCode, setPassCode] = useState(useSearchParams().get('key') ?? '')
 
     function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
         const value = Array.from(event.target.value.replace(/[^0-9]/g, ''))
@@ -59,17 +58,17 @@ export default function Update() {
 
     return (
         <div className="container mt-[30%]">
-            <h1>使用券</h1>
+            <h1>冷星联网验证系统/COSA Online Verification System</h1>
             <form onSubmit={onSubmitUpdate}>
                 <div className="form-floating mb-3">
                     <input value={serialNumber} onChange={handleOnChange} className="form-control form-control-lg" type="text" id="serialNumber" name="serialNumber" required/>
-                    <label className="form-label" htmlFor="serialNumber">序列号</label>
+                    <label className="form-label" htmlFor="serialNumber">序列号/SerialNumber</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input className="form-control form-control-lg" type="number" id="passCode" name="passCode" required minLength={5} maxLength={5}/>
-                    <label className="form-label" htmlFor="passCode">密码</label>
+                    <label className="form-label" htmlFor="passCode">校验码/Checksum</label>
                 </div>
-                <button className="btn btn-primary btn-lg mb-3" type="submit" disabled={submitUpdateDisabled}>使用</button>
+                <button className="btn btn-primary btn-lg mb-3" type="submit" disabled={submitUpdateDisabled}>验证/Vertificate</button>
             </form>
             {updateMessage}
         </div>
