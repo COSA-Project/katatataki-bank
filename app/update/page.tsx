@@ -58,7 +58,7 @@ export default function Update() {
 
     return (
         <div className="container mt-[30%]">
-            <h1>冷星联网验证系统/COSA Online Verification System</h1>
+            <h1>冷星联网验证系统</h1>
             <form onSubmit={onSubmitUpdate}>
                 <div className="form-floating mb-3">
                     <input value={serialNumber} onChange={handleOnChange} className="form-control form-control-lg" type="text" id="serialNumber" name="serialNumber" required/>
