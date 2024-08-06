@@ -66,7 +66,7 @@ export default function Update() {
                 </div>
                 <div className="form-floating mb-3">
                     <input className="form-control form-control-lg" type="number" id="passCode" name="passCode" required minLength={5} maxLength={5}/>
-                    <label className="form-label" htmlFor="passCode">校验码/Checksum</label>
+                    <label className="form-label" htmlFor="passCode">密码/PassCode</label>
                 </div>
                 <button className="btn btn-primary btn-lg mb-3" type="submit" disabled={submitUpdateDisabled}>验证/Vertificate</button>
             </form>
